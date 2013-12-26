@@ -16,8 +16,16 @@ By default, the following has been enabled:
 
 - Composer Autoloading
 - Setting Timezone to UTC
+- Setting database connection encoding to utf8 in `database.php.defaut`
 
 You may change either of these at your leisure.
+
+## Heroku Compatibility
+
+This application template is compatible with the [CHH/heroku-buildpack-php](https://github.com/CHH/heroku-buildpack-php) project. To use, simply configure your buildpack:
+
+    heroku config:set BUILDPACK_URL=https://github.com/CHH/heroku-buildpack-php
+    heroku config:set LOG_PATH=/app/vendor/php/var/log/
 
 ## Note about dependencies
 
