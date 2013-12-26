@@ -52,6 +52,16 @@ function parseUrlFromEnv($key) {
 	return parse_url(getenv($key));
 }
 
+// Helper function to retrieve values from the environment with a default
+function getFromEnv($key, $default) {
+	$value = $default;
+	if (getenv($key)  !== false) {
+		$value = getenv($key);
+	}
+
+	return $value;
+}
+
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', ['engine' => 'File']);
 
@@ -146,10 +156,12 @@ App::uses('CakeLog', 'Log');
 CakeLog::config('debug', [
 	'engine' => 'FileLog',
 	'types' => ['notice', 'info', 'debug'],
+	'path' =>  getFromEnv('LOG_PATH', LOGS),
 	'file' => 'debug',
 ]);
 CakeLog::config('error', [
 	'engine' => 'FileLog',
 	'types' => ['warning', 'error', 'critical', 'alert', 'emergency'],
+	'path' =>  getFromEnv('LOG_PATH', LOGS),
 	'file' => 'error',
 ]);
