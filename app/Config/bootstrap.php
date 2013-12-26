@@ -34,6 +34,15 @@ App::build(
 
 App::import('Vendor', array('file' => 'autoload'));
 
+// Helper function to retrieve environment variables with defaults
+function defineWithEnv($key, $default) {
+	$value = $default;
+	if (getenv($key) !== false) {
+		$value = getenv($key);
+	}
+	define($key, $value);
+}
+
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', ['engine' => 'File']);
 
