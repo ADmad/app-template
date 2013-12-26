@@ -76,4 +76,21 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);
+
+	public function __construct() {
+		$DATABASE_URL = parseUrlFromEnv('DATABASE_URL');
+		if ($DATABASE_URL) {
+			$this->default = array(
+				'datasource' => 'Database/' . ucfirst(strtolower($DATABASE_URL['scheme'])),
+				'persistent' => false,
+				'host'       => $DATABASE_URL['host'],
+				'login'      => $DATABASE_URL['user'],
+				'password'   => $DATABASE_URL['pass'],
+				'database'   => substr($DATABASE_URL['path'], 1),
+				'prefix'     => '',
+				'encoding'   => 'utf8',
+			);
+		}
+	}
+
 }
