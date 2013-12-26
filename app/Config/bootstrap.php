@@ -63,7 +63,21 @@ function getFromEnv($key, $default) {
 }
 
 // Setup a 'default' cache configuration for use in the application.
-Cache::config('default', ['engine' => 'File']);
+$_REDIS_URL = parseUrlFromEnv('REDIS_URL');
+if ($_REDIS_URL) {
+	Cache::config('default', array(
+		'engine' => 'Redis',
+		'prefix' => 'app_default_',
+		'serialize' => false,
+		'duration' => '+999 days',
+		'login' => Hash::get($_REDIS_URL, 'user'),
+		'password' => Hash::get($_REDIS_URL, 'pass'),
+		'server' => Hash::get($_REDIS_URL, 'host'),
+		'port' => Hash::get($_REDIS_URL, 'port'),
+	));
+} else {
+	Cache::config('default', ['engine' => 'File']);
+}
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
