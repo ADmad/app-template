@@ -43,6 +43,15 @@ function defineWithEnv($key, $default) {
 	define($key, $value);
 }
 
+// Helper function to parse urls from environment variables
+function parseUrlFromEnv($key) {
+	defineWithEnv($key, false);
+	if (getenv($key) === false) {
+		return false;
+	}
+	return parse_url(getenv($key));
+}
+
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', ['engine' => 'File']);
 
