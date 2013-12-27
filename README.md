@@ -26,6 +26,8 @@ This application template is compatible with the [CHH/heroku-buildpack-php](http
 
     heroku config:set BUILDPACK_URL=https://github.com/CHH/heroku-buildpack-php
     heroku config:set LOG_PATH=/app/vendor/php/var/log/
+    heroku config:set SECURITY_SALT=SOME_ALPHANUMERIC_SALT_HERE
+    heroku config:set SECURITY_CIPHER_SEED=SOME_NUMERIC_SEED_HERE
 
 ## Note about dependencies
 
