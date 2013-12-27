@@ -20,6 +20,34 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+// Helper function to retrieve environment variables with defaults
+function defineWithEnv($key, $default) {
+	$value = $default;
+	if (getenv($key) !== false) {
+		$value = getenv($key);
+	}
+	define($key, $value);
+}
+
+// Helper function to parse urls from environment variables
+function parseUrlFromEnv($key) {
+	defineWithEnv($key, false);
+	if (getenv($key) === false) {
+		return false;
+	}
+	return parse_url(getenv($key));
+}
+
+// Helper function to retrieve values from the environment with a default
+function getFromEnv($key, $default) {
+	$value = $default;
+	if (getenv($key)  !== false) {
+		$value = getenv($key);
+	}
+
+	return $value;
+}
+
 /**
  * CakePHP Debug Level:
  *

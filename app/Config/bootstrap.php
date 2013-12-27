@@ -34,34 +34,6 @@ App::build(
 
 App::import('Vendor', array('file' => 'autoload'));
 
-// Helper function to retrieve environment variables with defaults
-function defineWithEnv($key, $default) {
-	$value = $default;
-	if (getenv($key) !== false) {
-		$value = getenv($key);
-	}
-	define($key, $value);
-}
-
-// Helper function to parse urls from environment variables
-function parseUrlFromEnv($key) {
-	defineWithEnv($key, false);
-	if (getenv($key) === false) {
-		return false;
-	}
-	return parse_url(getenv($key));
-}
-
-// Helper function to retrieve values from the environment with a default
-function getFromEnv($key, $default) {
-	$value = $default;
-	if (getenv($key)  !== false) {
-		$value = getenv($key);
-	}
-
-	return $value;
-}
-
 // Setup a 'default' cache configuration for use in the application.
 $_REDIS_URL = parseUrlFromEnv('REDIS_URL');
 if ($_REDIS_URL) {
